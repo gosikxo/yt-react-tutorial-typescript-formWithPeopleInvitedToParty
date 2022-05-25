@@ -26,7 +26,6 @@ function App() {
     <div className="App">
       <h1>People invited to our party</h1>
       <List people={people}/>
-
     </div>
   );
 }
