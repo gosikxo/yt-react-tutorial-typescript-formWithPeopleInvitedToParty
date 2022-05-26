@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
+import { IState as Props } from '../App'
 
-export const AddToList = () => {
+interface IProps {
+  people: Props["people"]
+  setPeople: React.Dispatch<React.SetStateAction<Props["people"]>>
+}
+
+export const AddToList: React.FC<IProps> = () => {
 
   const [input, setInput] = useState({
     name: "",
@@ -9,12 +15,16 @@ export const AddToList = () => {
     img: ""
   })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setInput({
       ...input,
       //e.target.name to np. name, age itd.
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleClick = (): void => {
+
   }
 
   return (
@@ -50,6 +60,12 @@ export const AddToList = () => {
         onChange={handleChange}
         name="note"
       />
+      <button
+        className='AddToList-btn'
+        onClick={handleClick}
+      >
+        Add to List
+      </button>
     </div>
   )
 }
