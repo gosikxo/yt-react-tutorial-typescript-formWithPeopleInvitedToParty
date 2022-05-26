@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
+import { ImportsNotUsedAsValues } from 'typescript'
 import { IState as Props } from '../App'
 
 interface IProps {
-  people: Props["people"]
   setPeople: React.Dispatch<React.SetStateAction<Props["people"]>>
+  people: Props["people"]
 }
 
-export const AddToList: React.FC<IProps> = () => {
+export const AddToList: React.FC<IProps> = ({ setPeople, people }) => {
 
   const [input, setInput] = useState({
     name: "",
@@ -24,7 +25,30 @@ export const AddToList: React.FC<IProps> = () => {
   }
 
   const handleClick = (): void => {
+    if (
+      !input.name ||
+      !input.age ||
+      !input.img
+    ) {
+      return
+    }
 
+    setPeople([
+      ...people,
+      {
+        name: input.name,
+        age: parseInt(input.age),
+        url: input.img,
+        note: input.note
+      }
+    ]);
+
+    setInput({
+      name: "",
+      age: "",
+      note: "",
+      img: ""
+    })
   }
 
   return (
